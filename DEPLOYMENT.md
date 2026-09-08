@@ -4,9 +4,9 @@ Build: **First Grove 0.1.1-test.2**. This is an early test, not the finished gam
 
 ## Activate hosting once
 
-In this repository, open **Settings → Pages**. Under Build and deployment choose **Deploy from a branch**, select **main**, select **/docs**, and click **Save**. GitHub will show the site URL and deployment status there. Use the displayed URL only after the deployment succeeds. Later reviewed updates to main use the same publishing source.
+In this repository, open **Settings → Pages**. Under Build and deployment choose **Deploy from a branch**, select **main**, select **/(root)**, and click **Save**. GitHub will show the site URL and deployment status there. Use the displayed URL only after the deployment succeeds. Later reviewed updates to main use the same publishing source.
 
-The site directory is `docs/`. It contains only the self-contained game, its asset-integrity manifest, a no-Jekyll marker and a robots exclusion request. The robots file is not an access control: the repository and eventual hosted preview are public.
+The playable site files are at the repository root: `index.html`, `release.json`, `.nojekyll`, and `robots.txt`. The robots file is not an access control: the repository and eventual hosted preview are public. The former `/docs` deployment copies were removed when the project was standardized on root publishing.
 
 The separate Verify public preview workflow checks artifact hashes, JavaScript syntax and packaging. It does not activate Pages and does not test the browser. Run the same checks locally with `node verify-release.mjs` (Node 22 or later recommended). Branch-based Pages publishing and the verification workflow are separate; a green check is not proof of successful site deployment or runtime graphics.
 

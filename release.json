@@ -3,6 +3,7 @@
   "channel": "experimental-public-test",
   "acceptance": "Logic checks only; browser, GPU, accessibility and target-device acceptance pending.",
   "privacy": "No automatic telemetry. Saves and diagnostic exports stay local until shared by the player.",
+  "publishing_root": "/",
   "assets": {
     "index.html": {
       "bytes": 59598,
