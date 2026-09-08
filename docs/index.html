@@ -1,0 +1,536 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-QVTPN+WNQCK6kw9ESm9HIFh92rYzhZjfDxCxDQSQOIE='; style-src 'unsafe-inline'; img-src data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="robots" content="noindex,nofollow"><meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#243b31"><title>Wood Elves · The First Grove</title>
+<link rel="icon" href="data:,"><style>:root{color-scheme:light;--ink:#263c31;--muted:#667064;--cream:#f3f0e5;--line:#d6d5bd;--gold:#ae9154;--green:#426452}*{box-sizing:border-box}body{margin:0;color:var(--ink);font:14px/1.5 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;background:#a9bbb0}button,select{font:inherit;color:inherit}button{cursor:pointer;border:1px solid #c8cdbf;border-radius:5px;background:#f4f1e8ed;padding:9px 13px;min-height:40px;transition:background .15s,box-shadow .15s}button:hover{background:#fffaf0;box-shadow:0 2px 9px #1f352526}button:focus-visible,select:focus-visible,canvas:focus-visible{outline:3px solid #926820;outline-offset:3px}button:disabled{cursor:not-allowed;opacity:.55;box-shadow:none}button[aria-pressed=true]{background:var(--green);color:#fff;border-color:var(--green)}h1,h2,p{margin:0}h1,h2{font-family:Georgia,"Times New Roman",serif;font-weight:400}h1{font-size:38px;line-height:1.2;letter-spacing:-1.3px}h2{font-size:25px;line-height:1.2}small{font-size:11px}#game{height:100dvh;min-height:640px;overflow:hidden;position:relative}#grove{position:absolute;inset:0;width:100%;height:100%;touch-action:none;outline:none}#markers{position:absolute;inset:0;pointer-events:none}.marker{position:absolute;transform:translate(-50%,-50%);pointer-events:auto;padding:4px 10px;min-height:29px;font-size:10px;letter-spacing:.3px;background:#e9eddfdf;border:1px solid #ffffff99;border-radius:20px;box-shadow:0 2px 9px #1b38212b;white-space:nowrap}.marker.selected{background:#2f5744;color:#fff;border-color:#b9cba8}.marker::before{content:"";display:inline-block;width:5px;height:5px;background:#a9955c;border-radius:50%;margin-right:6px}.panel{background:#f6f3e9ed;border:1px solid #fff6;border-radius:9px;box-shadow:0 8px 32px #22352918;backdrop-filter:blur(14px)}.brand{position:absolute;top:28px;left:32px;text-shadow:0 1px 12px #e2e8d5}.eyebrow{font-size:9px;letter-spacing:2px;font-weight:700;margin-bottom:8px}.eyebrow span{color:#a5a580;margin:0 9px}.brand p{font-family:Georgia,serif;font-style:italic;font-size:14px;margin-top:6px}.resources{position:absolute;top:30px;left:50%;transform:translateX(-50%);display:flex;padding:12px 5px;gap:0}.resources>div{padding:0 21px;border-right:1px solid var(--line);display:flex;flex-direction:column}.resources>div:last-child{border:0}.resource-label{font-size:8px;letter-spacing:1.5px;white-space:nowrap}.resources strong{font-family:Georgia,serif;font-size:24px;line-height:1.35;font-weight:400}.top-actions{position:absolute;right:28px;top:31px;display:flex;gap:6px}.top-actions button{font-size:11px;padding:8px 11px}.inspector{position:absolute;right:28px;top:119px;width:264px;padding:22px}.inspector h2{margin-bottom:9px}.inspector p{font-size:12px;color:var(--muted)}.health{margin:18px 0 15px}.health span{display:flex;justify-content:space-between;font-size:10px}.health b{font-weight:500}.health meter{height:10px;width:100%;display:block;margin:7px 0 4px}.health meter::-webkit-meter-bar{background:#e1e1d4;border:0}.health meter::-webkit-meter-optimum-value{background:#729074}.health small{font-size:10px;color:var(--muted)}.connection,.construction,.workers{font-size:12px}.connection button,.construction button,.workers button{margin-top:9px;width:100%;font-size:12px}.construction{border-top:1px solid var(--line);margin-top:14px;padding-top:13px}.construction:empty{display:none}.construction strong{display:block;font-family:Georgia,serif;font-size:18px;font-weight:400}.construction .primary{background:var(--green);color:white;border-color:var(--green)}.construction .cancel{background:transparent;border:none;margin-top:0;min-height:32px;padding:4px}.workers p{margin-top:12px}.workers .pair{display:flex;gap:6px}.site-label{display:block;font-size:10px;margin-top:18px;color:var(--muted)}select{width:100%;margin-top:5px;background:#fff8;border:1px solid var(--line);border-radius:4px;padding:8px;font-size:11px;min-height:36px}.goals{position:absolute;left:32px;bottom:186px;width:245px;padding:20px;background:#eff0e2de}.goals h2{font-size:23px;margin-bottom:8px}.goals p{font-size:11px;color:var(--muted);margin-bottom:12px}.goal-row{font-size:10px;margin-top:5px}.goal-row::before{content:"○";margin-right:8px;color:#829578}.goal-row.done::before{content:"✓";color:#365846}.camera{position:absolute;right:28px;bottom:196px;display:flex;flex-direction:column;gap:5px}.camera button{width:42px;padding:6px;font-size:20px}.build-tray{position:absolute;bottom:51px;left:50%;transform:translateX(-50%);padding:12px;width:666px}.tray-title{display:flex;justify-content:space-between;margin:0 5px 9px;align-items:center}.tray-title span{font-size:8px;letter-spacing:1.7px;font-weight:700}.tray-title small{font-size:10px;color:var(--muted)}#build-options{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}.build-card{padding:9px 6px 8px;text-align:center;background:#e9ebde99;border:1px solid #d2d8c6;min-height:78px}.build-card svg{height:22px;width:31px;display:block;margin:0 auto 3px;fill:none;stroke:currentColor;stroke-width:1.4}.build-card .name{display:block;font-family:Georgia,serif;font-size:13px}.build-card .cost{font-size:9px;opacity:.75}.bottom-bar{position:absolute;bottom:0;left:0;right:0;height:38px;padding:0 27px;background:#253d31ec;color:#e4ead9;display:flex;justify-content:space-between;align-items:center;font-size:9px;letter-spacing:.4px}.time-controls{display:flex;align-items:center;gap:5px}.time-controls button{font-size:10px;min-height:26px;padding:2px 7px;background:transparent;color:#e2ebdc;border-color:#678071}.time-controls button[aria-pressed=true]{background:#d5dec8;color:#243c2c}.time-controls span{margin-left:10px}#notice{position:absolute;bottom:185px;left:50%;transform:translateX(-50%);max-width:440px;pointer-events:none;background:#2b493feF;color:#fff7df;padding:10px 18px;border-radius:6px;font-size:12px;opacity:0;transition:opacity .2s;text-align:center}#notice.visible{opacity:1}.help-panel{position:absolute;z-index:8;left:50%;top:50%;transform:translate(-50%,-50%);width:min(520px,calc(100% - 28px));padding:28px;box-shadow:0 0 0 200vw #172b2960}.help-panel p{font-size:13px;margin-top:14px}.help-panel small{display:block;margin-top:15px;color:var(--muted)}.help-actions{display:flex;gap:6px;margin-top:19px}.help-actions button{font-size:12px}.fatal{position:absolute;inset:25%;padding:30px;z-index:20}[hidden]{display:none!important}
+@media(max-width:1220px){.brand{top:23px;left:22px}.brand h1{font-size:31px}.resources{left:auto;right:22px;transform:none;top:21px}.resources>div{padding:0 16px}.top-actions{top:105px;left:22px;right:auto}.inspector{top:119px;right:22px;width:237px;padding:18px}.brand .eyebrow{font-size:8px}.goals{left:22px;width:218px}.build-tray{width:600px}.bottom-bar{font-size:8px}}
+@media(max-width:760px){#game{min-height:760px}.brand{left:16px;top:16px}.brand h1{font-size:29px}.brand .eyebrow{font-size:7px;letter-spacing:1.4px}.brand p{display:none}.resources{left:16px;right:16px;top:92px;transform:none;justify-content:space-around;padding:8px 3px}.resources>div{padding:0 10px}.resources strong{font-size:20px}.resource-label{font-size:7px;letter-spacing:.8px}.top-actions{left:auto;right:13px;top:23px;gap:4px}.top-actions button{padding:6px 8px;min-height:36px;font-size:10px}.top-actions #save,.top-actions #load{display:none}.inspector{top:auto;right:12px;left:12px;bottom:154px;width:auto;padding:13px 15px;max-height:240px;overflow:auto}.inspector .eyebrow{margin-bottom:4px}.inspector h2{font-size:20px;display:inline-block;margin-bottom:3px}.inspector p{font-size:11px}.health{margin:7px 0}.health meter,.health small{display:none}.site-label{margin-top:8px}.connection button,.construction button,.workers button{margin-top:4px;min-height:36px}.construction{padding-top:8px;margin-top:8px}.construction strong{font-size:16px}.construction .cancel{min-height:30px}.goals{top:162px;bottom:auto;left:16px;width:188px;padding:12px;background:#eff0e2d9}.goals h2{font-size:17px}.goals p{display:none}.goals .eyebrow{font-size:7px}.goal-row{font-size:9px}.build-tray{bottom:48px;left:12px;right:12px;width:auto;transform:none;padding:8px}.tray-title small{display:none}.tray-title{margin-bottom:6px}.tray-title span{font-size:7px}.build-card{min-height:67px;padding:5px 2px}.build-card .name{font-size:10px;line-height:1.2}.build-card .cost{font-size:8px}.build-card svg{height:17px}.camera{right:14px;top:168px;bottom:auto}.camera button{width:36px;min-height:36px;font-size:18px}.bottom-bar{height:40px;padding:0 12px;gap:6px}.bottom-bar #render-mode{font-size:7px;max-width:135px}.time-controls span{display:none}#notice{bottom:400px;width:calc(100% - 28px);font-size:11px}.marker{font-size:8px;padding:4px 7px;min-height:28px}.help-panel{max-height:90%;overflow:auto}.help-panel h2{font-size:24px}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style><style>.test-tools{border-top:1px solid var(--line);margin-top:18px;padding-top:10px}.test-tools h3{font-family:Georgia,serif;font-size:20px;font-weight:400;margin:4px 0}.help-actions{flex-wrap:wrap}.help-panel{max-height:calc(100dvh - 32px);overflow:auto}#preview-identity{font-size:11px;font-weight:600}#preview-metrics,#check-results{font-size:11px}.bottom-bar #render-mode{max-width:48%;letter-spacing:0}
+</style>
+</head>
+<body>
+<noscript><p>This prototype requires JavaScript. Enable it to load the grove.</p></noscript>
+<main id="game" aria-label="The First Grove settlement prototype">
+<canvas id="grove" tabindex="0" aria-label="Three-dimensional grove. Drag to orbit; use the zoom buttons. All construction is also available through the site menu."></canvas>
+<div id="markers" aria-label="Canopy building sites"></div>
+<header class="brand"><div class="eyebrow">WOOD ELVES <span> / </span> PUBLIC TEST PREVIEW 0.1.1</div><h1>The First Grove</h1><p>A settlement among living trees.</p></header>
+<section class="resources panel" aria-label="Settlement resources"><div><span class="resource-label">FALLEN WOOD</span><strong id="wood">80</strong></div><div><span class="resource-label">FOOD</span><strong id="food">60</strong></div><div><span class="resource-label">TOOLS</span><strong id="tools">0</strong></div><div><span class="resource-label">ELVES / BEDS</span><strong id="population">6 / 6</strong></div></section>
+<div class="top-actions"><button id="foliage" aria-pressed="true">Canopy on</button><button id="save">Save grove</button><button id="load">Load grove</button><button id="help" aria-expanded="false" aria-controls="help-panel">?</button></div>
+<section id="inspector" class="panel inspector" aria-label="Selected bough">
+<div class="eyebrow" id="tree-name">FERNWATCH</div><h2 id="site-name">Fernwatch landing</h2><p id="site-description"></p>
+<div class="health"><span>Host-tree vitality <b id="health-value"></b></span><meter id="health-meter" min="0" max="100" value="100">100%</meter><small id="load-value"></small></div>
+<div id="connection" class="connection"></div><div id="construction" class="construction"></div><div id="workers" class="workers"></div>
+<label class="site-label" for="site-select">Inspect another bough</label><select id="site-select"></select>
+</section>
+<section class="goals panel" aria-label="First steps"><div class="eyebrow">ESTABLISH YOUR GROVE</div><h2>Make room for life.</h2><p id="goal">Connect Fernwatch to the Hearth, then grow a garden.</p><div class="goal-row" id="goal-bridge"></div><div class="goal-row" id="goal-garden"></div><div class="goal-row" id="goal-food"></div></section>
+<nav class="camera" aria-label="Camera controls"><button id="zoom-in" aria-label="Zoom in">+</button><button id="camera-home" aria-label="Reset camera">⌖</button><button id="zoom-out" aria-label="Zoom out">−</button></nav>
+<section class="build-tray panel" aria-label="Building catalogue"><div class="tray-title"><span>GROW THE SETTLEMENT</span><small>Choose a bough, preview, then confirm.</small></div><div id="build-options"></div></section>
+<div class="bottom-bar"><span id="render-mode">Starting renderer…</span><div class="time-controls" aria-label="Simulation speed"><button data-speed="0" aria-pressed="false">Pause</button><button data-speed="1" aria-pressed="true">1×</button><button data-speed="2" aria-pressed="false">2×</button><button data-speed="4" aria-pressed="false">4×</button><span id="day">Grove day 1</span></div></div>
+<div id="notice" role="status" aria-live="polite"></div>
+<section id="help-panel" class="panel help-panel" hidden aria-label="Help and save files"><h2>Living above the forest</h2><p>Select a bough using a map label or the site menu. Connect it to the Hearth, preview a building, and confirm its construction. Assign an idle elf to a garden or lodge. Supplies enter storage only when an elf brings them home.</p><p>Drag the grove to orbit. Scroll or use + / − to zoom. Turn the canopy off to see routes. Low food slows travel; this prototype does not kill settlers. Host-tree vitality currently reflects supported building weight, not a living ecology simulation.</p><p>Save and load use this browser’s local storage; autosave runs every 20 seconds. Export a separate file for safekeeping. Paused and hidden tabs do not simulate offline progress.</p><div class="help-actions"><button id="menu-save">Save grove</button><button id="menu-load">Load grove</button><button id="export">Export save</button><button id="import">Import save</button><button id="close-help">Close</button><input id="import-file" type="file" accept="application/json,.json" hidden></div><section class="test-tools" aria-label="Preview testing"><h3>Test this build</h3><p id="preview-identity"></p><p id="preview-metrics"></p><div class="help-actions"><button id="logic-checks">Run logic checks</button><button id="export-diagnostics">Export diagnostics</button><button id="new-grove">New grove</button></div><p id="check-results" role="status"></p><p>Diagnostics remain on your device unless you export and share them. Nothing is sent automatically. Test saves, construction and controls on your actual device; logic checks do not test graphics.</p></section><small>Experimental test release, not a finished game. Software preview is not GPU or target-device acceptance.</small></section>
+<div id="fatal" class="panel fatal" hidden role="alert"></div>
+</main><script>(()=>{
+"use strict";
+
+// src/simulation.js
+// Deterministic, rendering-independent settlement simulation. All time is seconds.
+const VERSION = 1;
+const TREES = [
+  { id: 'elder', name: 'Elderheart', x: -9, z: -3, height: 19, capacity: 6 },
+  { id: 'silver', name: 'Silver bough', x: 7, z: -3, height: 21, capacity: 6 },
+  { id: 'fern', name: 'Fernwatch', x: 0, z: 10, height: 17, capacity: 6 }
+];
+const SITES = [
+  { id: 'hearth', tree: 'elder', name: 'The Hearth', position: [-6, 5, 1] },
+  { id: 'elder-high', tree: 'elder', name: 'Elderheart rise', position: [-11, 8, -5] },
+  { id: 'silver-low', tree: 'silver', name: 'Silver landing', position: [5, 5, 1] },
+  { id: 'silver-high', tree: 'silver', name: 'Sunlit bough', position: [9, 8, -5] },
+  { id: 'fern-low', tree: 'fern', name: 'Fernwatch landing', position: [1, 5, 10] },
+  { id: 'fern-high', tree: 'fern', name: 'Fernwatch crown', position: [-3, 8, 10] }
+];
+const LINKS = [
+  ['hearth', 'silver-low'], ['hearth', 'fern-low'], ['silver-low', 'fern-low'],
+  ['hearth', 'elder-high'], ['silver-low', 'silver-high'], ['fern-low', 'fern-high']
+];
+const KINDS = {
+  home: { name: 'Bough home', cost: 22, load: 2, description: 'A sheltered canopy dwelling. Adds four housing places.' },
+  gatherer: { name: 'Gathering lodge', cost: 18, load: 2, output: 'wood', description: 'Assigned elves gather fallen wood and carry it to the Hearth.' },
+  garden: { name: 'Canopy garden', cost: 24, load: 2, output: 'food', description: 'Assigned elves tend edible plants and carry food home.' },
+  storehouse: { name: 'Seed store', cost: 20, load: 1, description: 'Adds 60 storage capacity for each resource.' },
+  workshop: { name: 'Branchwright', cost: 28, load: 3, output: 'tools', description: 'An elf carries two wood here and returns one finished tool.' }
+};
+const linkId = (a, b) => [a, b].sort().join('|');
+const site = id => SITES.find(s => s.id === id);
+const clone = value => JSON.parse(JSON.stringify(value));
+const fail = reason => ({ ok: false, reason });
+function initialState() {
+  return { version: VERSION, elapsed: 0, resources: { wood: 80, food: 60, tools: 0 },
+    buildings: { hearth: { kind: 'hearth' }, 'silver-low': { kind: 'gatherer' } },
+    links: [linkId('hearth', 'silver-low')], speed: 1,
+    workers: Array.from({ length: 6 }, (_, id) => ({ id, assignment: id < 2 ? 'silver-low' : null, phase: 'idle', path: ['hearth'], edge: 0, progress: 0, work: 0, cargo: null })),
+    stats: { deliveredWood: 0, deliveredFood: 0, craftedTools: 0, built: 0, bridges: 0 } };
+}
+function route(state, from, to) {
+  if (!site(from) || !site(to)) return null;
+  const queue = [[from]], visited = new Set([from]);
+  while (queue.length) {
+    const path = queue.shift(), end = path.at(-1);
+    if (end === to) return path;
+    for (const pair of LINKS) {
+      if (!pair.includes(end) || !state.links.includes(linkId(...pair))) continue;
+      const next = pair.find(n => n !== end);
+      if (!visited.has(next)) { visited.add(next); queue.push([...path, next]); }
+    }
+  }
+  return null;
+}
+const connected = (state, id) => !!route(state, 'hearth', id);
+function treeLoad(state, tree) {
+  return SITES.filter(s => s.tree === tree).reduce((sum, s) => sum + (KINDS[state.buildings[s.id]?.kind]?.load || (s.id === 'hearth' ? 2 : 0)), 0);
+}
+const treeHealth = (state, tree) => Math.max(0, 100 - treeLoad(state, tree) * 6);
+const storage = state => 100 + Object.values(state.buildings).filter(b => b.kind === 'storehouse').length * 60;
+const housing = state => 6 + Object.values(state.buildings).filter(b => b.kind === 'home').length * 4;
+function canBuild(state, id, kind) {
+  const s = site(id), k = Object.hasOwn(KINDS, kind) ? KINDS[kind] : null;
+  if (!s || !k) return fail('Choose a valid site and building.');
+  if (Object.hasOwn(state.buildings, id)) return fail('This bough is already occupied.');
+  if (!connected(state, id)) return fail('Connect this bough to the Hearth first.');
+  if (state.resources.wood < k.cost) return fail(`Needs ${k.cost} wood at the Hearth.`);
+  const t = TREES.find(t => t.id === s.tree);
+  if (treeLoad(state, t.id) + k.load > t.capacity) return fail('This host tree cannot support that much weight.');
+  return { ok: true };
+}
+function build(state, id, kind) {
+  const result = canBuild(state, id, kind); if (!result.ok) return result;
+  state.resources.wood -= KINDS[kind].cost; state.buildings[id] = { kind }; state.stats.built++; return result;
+}
+function canConnect(state, a, b) {
+  if (!LINKS.some(p => linkId(...p) === linkId(a, b))) return fail('No safe bridge route exists here.');
+  if (state.links.includes(linkId(a, b))) return fail('This bridge is already built.');
+  if (!connected(state, a) && !connected(state, b)) return fail('A bridge must extend the connected settlement.');
+  if (state.resources.wood < 12) return fail('A bridge needs 12 wood.');
+  return { ok: true };
+}
+function connect(state, a, b) {
+  const result = canConnect(state, a, b); if (!result.ok) return result;
+  state.links.push(linkId(a, b)); state.resources.wood -= 12; state.stats.bridges++; return result;
+}
+function assign(state, id) {
+  const kind = state.buildings[id]?.kind;
+  if (!Object.hasOwn(KINDS, kind || '') || !KINDS[kind].output || !connected(state, id)) return fail('A connected workplace is required.');
+  if (state.workers.filter(w => w.assignment === id).length >= 2) return fail('This workplace has two elves already.');
+  const worker = state.workers.find(w => !w.assignment && w.phase === 'idle');
+  if (!worker) return fail('No idle elves are available.');
+  worker.assignment = id; return { ok: true };
+}
+function unassign(state, id) {
+  const w = [...state.workers].reverse().find(w => w.assignment === id);
+  if (!w) return fail('No elf is assigned here.');
+  // Finish the current trip, rather than teleporting people or goods.
+  w.assignment = null; return { ok: true };
+}
+function workerPosition(worker) {
+  const a = site(worker.path[worker.edge])?.position || site('hearth').position;
+  const b = site(worker.path[worker.edge + 1])?.position || a;
+  const t = worker.progress;
+  return a.map((v, i) => v + (b[i] - v) * t + (i === 1 && b !== a ? -Math.sin(Math.PI * t) * 0.35 : 0));
+}
+function embark(w, path, phase) { w.path = path; w.edge = 0; w.progress = 0; w.phase = phase; }
+function deposit(state, w) {
+  if (w.cargo) {
+    const { resource, amount } = w.cargo;
+    const accepted = Math.min(amount, storage(state) - state.resources[resource]);
+    state.resources[resource] += accepted;
+    if (resource === 'wood') state.stats.deliveredWood += accepted;
+    if (resource === 'food') state.stats.deliveredFood += accepted;
+    if (resource === 'tools') state.stats.craftedTools += accepted;
+  }
+  w.cargo = null; w.phase = 'idle'; w.path = ['hearth']; w.edge = 0; w.progress = 0;
+}
+function step(state, dt) {
+  state.elapsed += dt;
+  state.resources.food = Math.max(0, state.resources.food - dt * state.workers.length * 0.016);
+  for (const w of state.workers) {
+    if (w.phase === 'idle') {
+      if (!w.assignment) continue;
+      const path = route(state, 'hearth', w.assignment), kind = state.buildings[w.assignment]?.kind;
+      if (!path || !KINDS[kind]?.output) continue;
+      if (kind === 'workshop') {
+        if (state.resources.wood < 2) continue;
+        state.resources.wood -= 2; w.cargo = { resource: 'wood', amount: 2 };
+      }
+      embark(w, path, 'outbound');
+    } else if (w.phase === 'working') {
+      w.work += dt;
+      if (w.work >= 4) {
+        const destination = w.path.at(-1), kind = state.buildings[destination].kind;
+        w.cargo = { resource: KINDS[kind].output, amount: kind === 'workshop' ? 1 : 6 };
+        embark(w, route(state, destination, 'hearth'), 'returning');
+      }
+    } else {
+      const a = site(w.path[w.edge]).position, b = site(w.path[w.edge + 1]).position;
+      const distance = Math.hypot(...a.map((v, i) => v - b[i]));
+      const rate = state.resources.food > 0 ? 2.2 : 1.1;
+      w.progress += dt * rate / distance;
+      if (w.progress >= 1) {
+        w.edge++; w.progress = 0;
+        if (w.edge === w.path.length - 1) {
+          if (w.phase === 'returning') deposit(state, w);
+          else { w.phase = 'working'; w.work = 0; w.cargo = null; }
+        }
+      }
+    }
+  }
+}
+function advance(state, seconds) {
+  if (!Number.isFinite(seconds) || seconds < 0 || seconds > 3600) throw new Error('Invalid simulation duration.');
+  let remaining = seconds * state.speed;
+  while (remaining > 0.00000001) { const dt = Math.min(0.1, remaining); step(state, dt); remaining -= dt; }
+}
+function validateState(value) {
+  const bad = () => { throw new Error('Save is incompatible or damaged. The current grove was not changed.'); };
+  if (!value || value.version !== VERSION || !Number.isFinite(value.elapsed) || value.elapsed < 0 || ![0, 1, 2, 4].includes(value.speed)) bad();
+  if (!value.resources || !value.buildings || !Array.isArray(value.links) || !Array.isArray(value.workers) || value.workers.length !== 6) bad();
+  for (const resource of ['wood', 'food', 'tools']) if (!Number.isFinite(value.resources[resource]) || value.resources[resource] < 0 || value.resources[resource] > 1000) bad();
+  if (Object.keys(value.resources).length !== 3 || Object.keys(value.buildings).length > SITES.length) bad();
+  if (value.buildings.hearth?.kind !== 'hearth') bad();
+  for (const [id, b] of Object.entries(value.buildings)) if (!site(id) || !b || (id !== 'hearth' && !Object.hasOwn(KINDS, b.kind))) bad();
+  if (new Set(value.links).size !== value.links.length || value.links.some(l => !LINKS.some(p => linkId(...p) === l))) bad();
+  for (const id of Object.keys(value.buildings)) if (!connected(value, id)) bad();
+  for (const tree of TREES) if (treeLoad(value, tree.id) > tree.capacity) bad();
+  if (Object.values(value.resources).some(n => n > storage(value))) bad();
+  if (!value.stats || ['deliveredWood', 'deliveredFood', 'craftedTools', 'built', 'bridges'].some(k => !Number.isFinite(value.stats[k]) || value.stats[k] < 0)) bad();
+  for (const [index, w] of value.workers.entries()) {
+    if (!w || w.id !== index || !['idle', 'outbound', 'working', 'returning'].includes(w.phase)) bad();
+    if (w.assignment !== null && (!site(w.assignment) || !KINDS[value.buildings[w.assignment]?.kind]?.output)) bad();
+    if (!Array.isArray(w.path) || w.path.length < 1 || w.path.length > SITES.length || w.path.some(id => !site(id))) bad();
+    if (!Number.isInteger(w.edge) || w.edge < 0 || w.edge >= w.path.length || !Number.isFinite(w.progress) || w.progress < 0 || w.progress >= 1 || !Number.isFinite(w.work) || w.work < 0 || w.work > 10) bad();
+    for (let i = 1; i < w.path.length; i++) if (!value.links.includes(linkId(w.path[i - 1], w.path[i]))) bad();
+    if (['outbound', 'returning'].includes(w.phase) && w.edge >= w.path.length - 1) bad();
+    if (w.phase === 'outbound' && (w.path[0] !== 'hearth' || !KINDS[value.buildings[w.path.at(-1)]?.kind]?.output)) bad();
+    if (w.phase === 'returning' && w.path.at(-1) !== 'hearth') bad();
+    if (w.phase === 'idle' && (w.path.length !== 1 || w.path[0] !== 'hearth' || w.cargo !== null)) bad();
+    if (w.phase === 'working' && (w.edge !== w.path.length - 1 || !KINDS[value.buildings[w.path.at(-1)]?.kind]?.output)) bad();
+    if (w.cargo !== null && (!w.cargo || !['wood', 'food', 'tools'].includes(w.cargo.resource) || !Number.isFinite(w.cargo.amount) || w.cargo.amount < 0 || w.cargo.amount > 6)) bad();
+  }
+  for (const s of SITES) if (value.workers.filter(w => w.assignment === s.id).length > 2) bad();
+  return clone(value);
+}
+function serialize(state) { return JSON.stringify(validateState(state)); }
+function deserialize(text) {
+  if (typeof text !== 'string' || text.length > 50000) throw new Error('Save file exceeds the supported size.');
+  return validateState(JSON.parse(text));
+}
+
+
+// src/renderer.js
+// Small, dependency-free geometry renderer for this bounded visual spike.
+// Canvas2D is an explicitly labeled software preview, never a WebGL substitute in acceptance.
+const color = hex => [1, 3, 5].map(i => parseInt(hex.slice(i, i + 2), 16) / 255);
+const dot = (a, b) => a.reduce((s, v, i) => s + v * b[i], 0);
+const sub = (a, b) => a.map((v, i) => v - b[i]);
+const cross = (a, b) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
+const norm = a => { const d = Math.hypot(...a) || 1; return a.map(v => v / d); };
+class Geometry {
+  constructor() { this.faces = []; }
+  face(points, tint) {
+    const c = typeof tint === 'string' ? color(tint) : tint;
+    const normal = norm(cross(sub(points[1], points[0]), sub(points[2], points[0])));
+    this.faces.push({ points, normal, color: c, center: points[0].map((_, i) => points.reduce((s, p) => s + p[i], 0) / points.length) });
+  }
+  box(x, y, z, w, h, d, tint) {
+    const p = [[-1,0,-1],[1,0,-1],[1,0,1],[-1,0,1],[-1,1,-1],[1,1,-1],[1,1,1],[-1,1,1]].map(v => [x+v[0]*w/2,y+v[1]*h,z+v[2]*d/2]);
+    for (const f of [[0,3,2,1],[4,5,6,7],[0,1,5,4],[1,2,6,5],[2,3,7,6],[3,0,4,7]]) this.face(f.map(i=>p[i]),tint);
+  }
+  tube(a, b, ra, rb, tint, segments = 8) {
+    const dir = norm(sub(b, a)), side = norm(cross(dir, Math.abs(dir[1]) > .9 ? [1,0,0] : [0,1,0])), other = cross(dir, side);
+    const ring = (p, r) => Array.from({length:segments},(_,i)=>p.map((v,j)=>v+r*(side[j]*Math.cos(i/segments*Math.PI*2)+other[j]*Math.sin(i/segments*Math.PI*2))));
+    const r0=ring(a,ra),r1=ring(b,rb);
+    for(let i=0;i<segments;i++){const j=(i+1)%segments;this.face([r0[i],r0[j],r1[j],r1[i]],tint);}
+    this.face([...r0].reverse(),tint);this.face(r1,tint);
+  }
+  ellipsoid(center, radii, tint, segments = 9, rings = 5, wobble = 0) {
+    const p = (i,j) => { i=((i%segments)+segments)%segments; const a=i/segments*Math.PI*2,b=j/rings*Math.PI,variation=1+wobble*Math.sin(i*3.7+j*4.9);return [center[0]+Math.cos(a)*Math.sin(b)*radii[0]*variation,center[1]+Math.cos(b)*radii[1],center[2]+Math.sin(a)*Math.sin(b)*radii[2]*variation]; };
+    for(let j=0;j<rings;j++)for(let i=0;i<segments;i++){
+      if(j===0)this.face([p(i,0),p(i+1,1),p(i,1)],tint);
+      else if(j===rings-1)this.face([p(i,j),p(i+1,j),p(i,j+1)],tint);
+      else this.face([p(i,j),p(i+1,j),p(i+1,j+1),p(i,j+1)],tint);
+    }
+  }
+  merge(other) { this.faces.push(...other.faces); }
+}
+const VERTEX = `#version 300 es
+in vec3 aPosition; in vec3 aNormal; in vec3 aColor;
+uniform mat4 uView; out vec3 vNormal; out vec3 vColor; out float vDepth;
+void main(){gl_Position=uView*vec4(aPosition,1.0);vNormal=aNormal;vColor=aColor;vDepth=gl_Position.z;}`;
+const FRAGMENT = `#version 300 es
+precision highp float;
+in vec3 vNormal; in vec3 vColor; in float vDepth; out vec4 outColor;
+void main(){vec3 n=normalize(vNormal);float light=.64+.26*max(0.0,dot(n,normalize(vec3(-.6,1.,.4))))+.12*n.y;
+vec3 c=vColor*light;float fog=clamp((vDepth+.1)*.5,0.,.24);c=mix(c,vec3(.62,.72,.65),fog);outColor=vec4(c,1.);}`;
+class GroveRenderer {
+  constructor(canvas, onChange = () => {}) {
+    this.canvas=canvas;this.yaw=.48;this.pitch=.52;this.zoom=1;this.target=[0,6,1];this.staticGeometry=new Geometry();this.frames=0;this.onChange=onChange;
+    this.gl=canvas.getContext('webgl2',{antialias:true,alpha:false,preserveDrawingBuffer:false});
+    if(this.gl){this.mode='WebGL 2';this.initGL();}else{this.mode='Software 3D preview';this.ctx=canvas.getContext('2d',{alpha:false});}
+    if(!this.gl&&!this.ctx)throw new Error('Neither WebGL nor a software canvas is available.');
+    this.pointer=null;
+    canvas.addEventListener('pointerdown',e=>{this.pointer={id:e.pointerId,x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId);});
+    canvas.addEventListener('pointermove',e=>{if(this.pointer?.id!==e.pointerId)return;this.yaw-=(e.clientX-this.pointer.x)*.005;this.pitch=Math.max(.22,Math.min(1.05,this.pitch+(e.clientY-this.pointer.y)*.004));this.pointer.x=e.clientX;this.pointer.y=e.clientY;this.onChange();});
+    const release=()=>{this.pointer=null;};canvas.addEventListener('pointerup',release);canvas.addEventListener('pointercancel',release);
+    canvas.addEventListener('wheel',e=>{e.preventDefault();this.zoom=Math.max(.55,Math.min(1.8,this.zoom*Math.exp(-e.deltaY*.001)));this.onChange();},{passive:false});
+    canvas.addEventListener('webglcontextlost',e=>{e.preventDefault();this.lost=true;this.onChange();});
+    canvas.addEventListener('webglcontextrestored',()=>{this.initGL();this.uploadStatic();this.lost=false;this.onChange();});
+  }
+  initGL(){const gl=this.gl;const shader=(type,source)=>{const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw new Error(gl.getShaderInfoLog(s));return s;};
+    const vs=shader(gl.VERTEX_SHADER,VERTEX),fs=shader(gl.FRAGMENT_SHADER,FRAGMENT);this.program=gl.createProgram();gl.attachShader(this.program,vs);gl.attachShader(this.program,fs);gl.linkProgram(this.program);gl.deleteShader(vs);gl.deleteShader(fs);if(!gl.getProgramParameter(this.program,gl.LINK_STATUS))throw new Error(gl.getProgramInfoLog(this.program));
+    this.staticBuffer=gl.createBuffer();this.dynamicBuffer=gl.createBuffer();this.viewLocation=gl.getUniformLocation(this.program,'uView');this.attributes=['aPosition','aNormal','aColor'].map(n=>gl.getAttribLocation(this.program,n));gl.enable(gl.DEPTH_TEST);gl.disable(gl.CULL_FACE);
+  }
+  vertices(geometry){const out=[];for(const f of geometry.faces)for(let i=1;i<f.points.length-1;i++)for(const p of [f.points[0],f.points[i],f.points[i+1]])out.push(...p,...f.normal,...f.color);return new Float32Array(out);}
+  uploadStatic(){if(!this.gl)return;const data=this.vertices(this.staticGeometry);this.staticCount=data.length/9;this.gl.bindBuffer(this.gl.ARRAY_BUFFER,this.staticBuffer);this.gl.bufferData(this.gl.ARRAY_BUFFER,data,this.gl.STATIC_DRAW);}
+  setGeometry(geometry){this.staticGeometry=geometry;this.uploadStatic();}
+  resize(){const r=this.canvas.getBoundingClientRect(),dpr=Math.min(devicePixelRatio||1,1.5);this.width=r.width;this.height=r.height;if(this.canvas.width!==Math.round(r.width*dpr)||this.canvas.height!==Math.round(r.height*dpr)){this.canvas.width=Math.round(r.width*dpr);this.canvas.height=Math.round(r.height*dpr);}this.dpr=dpr;this.scale=Math.min(this.width/40,this.height/32)*this.zoom;const c=Math.cos(this.yaw),s=Math.sin(this.yaw),cp=Math.cos(this.pitch),sp=Math.sin(this.pitch);this.right=[c,0,-s];this.up=[-s*sp,cp,-c*sp];this.forward=[s*cp,sp,c*cp];}
+  project(p){const q=sub(p,this.target);return [this.width/2+dot(q,this.right)*this.scale,this.height/2-dot(q,this.up)*this.scale,dot(q,this.forward)];}
+  resetCamera(){this.yaw=.48;this.pitch=.52;this.zoom=1;this.onChange();}
+  draw(dynamic=new Geometry()){
+    this.resize();if(this.lost)return;this.frames++;
+    if(this.gl){this.drawGL(dynamic);return;}
+    const ctx=this.ctx;ctx.setTransform(this.dpr,0,0,this.dpr,0,0);ctx.fillStyle='#a9bbb0';ctx.fillRect(0,0,this.width,this.height);
+    const faces=[];for(const geometry of [this.staticGeometry,dynamic])for(const f of geometry.faces){
+      const points=f.points.map(p=>this.project(p));if(points.every(p=>p[0]<0)||points.every(p=>p[0]>this.width)||points.every(p=>p[1]<0)||points.every(p=>p[1]>this.height))continue;
+      faces.push({f,points,depth:this.project(f.center)[2]+(f.points.every(p=>p[1]<0)?-10000:0)});
+    }
+    faces.sort((a,b)=>a.depth-b.depth);
+    for(const {f,points} of faces){
+      const depth=this.project(f.center)[2];
+      const light=.64+.26*Math.max(0,dot(f.normal,[-.487,.811,.324]))+.12*f.normal[1],fog=Math.max(0,Math.min(.24,(-depth/100+.1)*.5));
+      const c=f.color.map((v,i)=>Math.round(Math.min(1,(v*light)*(1-fog)+[.62,.72,.65][i]*fog)*255));
+      ctx.fillStyle=`rgb(${c.join(',')})`;ctx.beginPath();ctx.moveTo(points[0][0],points[0][1]);for(const p of points.slice(1))ctx.lineTo(p[0],p[1]);ctx.closePath();ctx.fill();
+    }
+    this.visibleFaces=faces.length;
+  }
+  drawGL(dynamic){const gl=this.gl;gl.viewport(0,0,this.canvas.width,this.canvas.height);gl.clearColor(.663,.733,.69,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.useProgram(this.program);
+    const r=this.right.map(v=>v*this.scale*2/this.width),u=this.up.map(v=>v*this.scale*2/this.height),f=this.forward.map(v=>-v/100);
+    gl.uniformMatrix4fv(this.viewLocation,false,new Float32Array([r[0],u[0],f[0],0,r[1],u[1],f[1],0,r[2],u[2],f[2],0,-dot(r,this.target),-dot(u,this.target),-dot(f,this.target),1]));
+    const draw=(buffer,count)=>{gl.bindBuffer(gl.ARRAY_BUFFER,buffer);this.attributes.forEach((a,i)=>{gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,3,gl.FLOAT,false,36,i*12);});gl.drawArrays(gl.TRIANGLES,0,count);};
+    draw(this.staticBuffer,this.staticCount);const data=this.vertices(dynamic);gl.bindBuffer(gl.ARRAY_BUFFER,this.dynamicBuffer);gl.bufferData(gl.ARRAY_BUFFER,data,gl.DYNAMIC_DRAW);draw(this.dynamicBuffer,data.length/9);
+  }
+}
+
+
+// src/scene.js
+const P={bark:'#72563d',barkLight:'#94734d',wood:'#af8859',edge:'#d9b778',rail:'#7f6745',leaf:'#4f7758',light:'#8b9d64',dark:'#365846',roof:'#416e66',wall:'#dabd82',glow:'#ffe4a1'};
+function rng(seed){let n=seed;return()=>{n=(Math.imul(1664525,n)+1013904223)>>>0;return n/4294967296;};}
+function curve(g,a,b,r,tint,bend=0){const points=Array.from({length:7},(_,i)=>a.map((v,j)=>v+(b[j]-v)*i/6+(j===1?Math.sin(i/6*Math.PI)*bend:0)));for(let i=0;i<6;i++)g.tube(points[i],points[i+1],r,r,tint,5);}
+function plant(g,x,y,z,scale,random){for(let i=0;i<5;i++){const a=i/5*Math.PI*2;const tip=[x+Math.cos(a)*scale,y+.5*scale,z+Math.sin(a)*scale];g.face([[x,y,z],[tip[0]-.12,tip[1]-.12,tip[2]],tip,[tip[0]+.12,tip[1]-.12,tip[2]]],i%2?P.leaf:P.light);}}
+function tree(g,t,foliage,random){
+  const {x,z,height:h}=t;
+  for(let i=0;i<7;i++){const a=i/7*Math.PI*2;g.tube([x+Math.cos(a)*3.3,0,z+Math.sin(a)*3.3],[x,.9,z],.22,1,P.bark,7);}
+  const bends=[[x,0,z],[x-.3,h*.33,z+.1],[x+.4,h*.66,z-.5],[x-.5,h,z]];
+  for(let i=0;i<3;i++)g.tube(bends[i],bends[i+1],1.3-i*.29,1.02-i*.3,i===0?P.bark:P.barkLight,11);
+  // Fine bark ribs, branching rather than an undifferentiated cylinder.
+  for(let i=0;i<10;i++){const a=i/10*Math.PI*2;curve(g,[x+Math.cos(a)*1.25,.3,z+Math.sin(a)*1.25],[x+Math.cos(a)*.92,h*.43,z+Math.sin(a)*.92],.055,i%2?P.barkLight:P.bark,.25);}
+  for(let i=0;i<8;i++){
+    const a=i*2.4,yy=h*.53+(i%3)*1.6,end=[x+Math.cos(a)*(4+(i%2)),yy+2.6,z+Math.sin(a)*4];
+    g.tube([x,yy,z],end,.45,.1,P.barkLight,8);
+    if(foliage){for(let j=0;j<3;j++){const offset=(j-1)*1.5;g.ellipsoid([end[0]+offset,end[1]+.8+random(),end[2]+offset*.5],[2.9+random(),1.15+random()*.4,2.4+random()], [P.leaf,P.light,P.dark][(i+j)%3],9,4,.14);}}
+  }
+  if(foliage){g.ellipsoid([x,h+.2,z],[4.4,1.8,3.8],P.leaf,11,5,.16);g.ellipsoid([x-.8,h+1.1,z-.5],[3.6,1.3,3],P.light,10,4,.13);}
+  for(let i=0;i<9;i++)plant(g,x+(random()-.5)*5,0,z+(random()-.5)*5,.5+random()*.5,random);
+}
+function platform(g,p,r=2.05){
+  g.tube([p[0],p[1]-.3,p[2]],[p[0],p[1],p[2]],r,r,P.wood,12);
+  for(let i=-5;i<=5;i++){const zz=i*.32,xx=Math.sqrt(Math.max(0,r*r-zz*zz));g.tube([p[0]-xx,p[1]+.01,p[2]+zz],[p[0]+xx,p[1]+.01,p[2]+zz],.013,.013,P.rail,4);}
+  for(let i=0;i<12;i++){const a=i/12*Math.PI*2;if(i===2||i===8)continue;const b=(i+1)/12*Math.PI*2;const pa=[p[0]+Math.cos(a)*r,p[1],p[2]+Math.sin(a)*r];g.tube(pa,[pa[0],pa[1]+.65,pa[2]],.045,.035,P.edge,5);curve(g,[pa[0],pa[1]+.52,pa[2]],[p[0]+Math.cos(b)*r,p[1]+.52,p[2]+Math.sin(b)*r],.022,P.rail,-.09);}
+}
+function archWindow(g,x,y,z){g.face([[x-.3,y,z],[x+.3,y,z],[x+.3,y+.65,z],[x,y+.98,z],[x-.3,y+.65,z]],P.glow);g.tube([x,y,z+.01],[x,y+.85,z+.01],.026,.018,P.bark,4);g.tube([x-.3,y+.42,z+.01],[x+.3,y+.42,z+.01],.026,.018,P.bark,4);}
+function building(g,p,kind,preview=false){
+  const [x,y,z]=p,tint=preview?'#a1d1bc':P.wall;
+  if(kind==='garden'){
+    for(let row=0;row<3;row++){g.box(x,y+.03,z-.85+row*.82,2.6,.22,.5,P.bark);g.box(x,y+.25,z-.85+row*.82,2.4,.06,.4,'#4e5540');for(let i=0;i<5;i++){plant(g,x-1+i*.5,y+.3,z-.85+row*.82,.42,()=>.5);g.ellipsoid([x-1+i*.5,y+.56,z-.85+row*.82],[.08,.1,.08],row%2?'#d4b465':'#9cb368',5,3);}}
+    g.tube([x-1.5,y,z],[x-1.5,y+1.6,z],.05,.04,P.edge,5);g.box(x-1.5,y+1.45,z,.6,.35,.04,P.roof);return;
+  }
+  const isHearth=kind==='hearth',height=isHearth?2.1:1.6;
+  g.tube([x,y,z],[x,y+height,z],1.15,1.0,tint,8);
+  for(let i=0;i<8;i++){const a=i/8*Math.PI*2;g.tube([x+Math.cos(a)*1.12,y,z+Math.sin(a)*1.12],[x+Math.cos(a),y+height,z+Math.sin(a)],.055,.045,P.bark,5);}
+  const roof=kind==='storehouse'?'#ac9259':kind==='workshop'?'#627b81':P.roof;
+  const rings=[[1.8,height-.08],[1.3,height+.55],[.76,height+1.25],[.1,height+2.25]];
+  for(let i=0;i<rings.length-1;i++){
+    const [r0,h0]=rings[i],[r1,h1]=rings[i+1];
+    for(let j=0;j<10;j++){const a=j/10*Math.PI*2,b=(j+1)/10*Math.PI*2;
+      g.face([[x+Math.cos(a)*r0,y+h0,z+Math.sin(a)*r0*1.12],[x+Math.cos(b)*r0,y+h0,z+Math.sin(b)*r0*1.12],[x+Math.cos(b)*r1,y+h1,z+Math.sin(b)*r1*1.12],[x+Math.cos(a)*r1,y+h1,z+Math.sin(a)*r1*1.12]],preview?'#72a997':roof);
+      if(i===0)g.tube([x+Math.cos(a)*r0,y+h0,z+Math.sin(a)*r0*1.12],[x+Math.cos(b)*r0,y+h0,z+Math.sin(b)*r0*1.12],.035,.035,P.edge,4);
+    }
+  }
+  curve(g,[x,y+height+2.2,z],[x+.6,y+height+2.65,z],.05,P.edge,.25);
+  archWindow(g,x,y+.4,z+1.07);
+  g.box(x-1.4,y+.1,z+.9,.52,.55,.55,P.bark);g.box(x+1.3,y+.1,z+.8,.45,.4,.45,P.wood);
+  if(kind==='gatherer')for(let i=0;i<4;i++)g.tube([x+1.4,y+.15+i*.11,z-.5],[x+1.4,y+.15+i*.11,z+.25],.08,.08,P.barkLight,6);
+  if(kind==='workshop'){g.box(x,y+.65,z+1.35,1.3,.13,.55,P.wood);g.tube([x-.5,y,z+1.3],[x-.5,y+.65,z+1.3],.06,.06,P.rail,5);}
+  if(isHearth){g.tube([x+1.6,y,z+.9],[x+1.6,y+2.2,z+.9],.05,.04,P.edge,5);g.face([[x+1.6,y+2.1,z+.9],[x+2.2,y+1.9,z+.9],[x+1.6,y+1.4,z+.9]],P.roof);}
+}
+function bridge(g,a,b){const delta=b.map((v,i)=>v-a[i]),len=Math.hypot(delta[0],delta[2]),side=[-delta[2]/len,0,delta[0]/len];
+  const point=t=>a.map((v,i)=>v+delta[i]*t+(i===1?-Math.sin(t*Math.PI)*.35:0));
+  const count=Math.ceil(Math.hypot(...delta)/.35);
+  for(let i=0;i<=count;i++){const t=i/count,p=point(t);const q=(d,h)=>p.map((v,j)=>v+side[j]*d+(j===1?h:0));const along=delta.map(v=>v/Math.hypot(...delta)*.15);const corner=(d,k)=>q(d,.035).map((v,j)=>v+along[j]*k);g.face([corner(-.48,-1),corner(.48,-1),corner(.48,1),corner(-.48,1)],P.wood);if(i%5===0)for(const d of [-.5,.5])g.tube(q(d,0),q(d,.68),.04,.035,P.rail,5);}
+  for(const d of [-.5,.5]){const aa=a.map((v,i)=>v+side[i]*d+(i===1?.58:0)),bb=b.map((v,i)=>v+side[i]*d+(i===1?.58:0));curve(g,aa,bb,.03,P.edge,-.35);}
+}
+function makeScene(state,foliage=true){const g=new Geometry(),random=rng(628);g.tube([0,-1,0],[0,-.12,0],34,34,'#6e8265',50);
+  // Stream ribbon and banks; no borrowed artwork or network assets.
+  for(let i=-12;i<15;i++){const z=i*2,x=17+Math.sin(i*.3)*2;g.box(x,-.08,z,2.7,.015,2.3,'#739da0');g.ellipsoid([x-2,-.02,z],[1.4,.2,1.7],'#839070',8,3);}
+  for(let i=0;i<42;i++){const x=(random()-.5)*58,z=(random()-.5)*54;if(Math.abs(x)<14&&Math.abs(z)<15)continue;const h=7+random()*7;g.tube([x,0,z],[x,h,z],.45,.18,'#7b8166',7);if(foliage)g.ellipsoid([x,h,z],[2.6,2.1,2.4],['#779575','#799677','#6f8d73'][i%3],7,4,.1);}
+  for(let i=0;i<95;i++){const x=(random()-.5)*40,z=(random()-.5)*34;if(Math.abs(x-17)<2)continue;plant(g,x,0,z,.25+random()*.6,random);if(i%6===0)g.ellipsoid([x,.12,z],[.45,.3,.5],'#939680',7,3);}
+  TREES.forEach(t=>tree(g,t,foliage,random));
+  for(const s of SITES){const p=s.position,t=TREES.find(t=>t.id===s.tree);platform(g,p,state.buildings[s.id]?2.05:1.5);g.tube([t.x,p[1]-1.8,t.z],p,.28,.12,P.barkLight,8);if(state.buildings[s.id])building(g,p,state.buildings[s.id].kind);}
+  for(const pair of LINKS)if(state.links.includes(linkId(...pair)))bridge(g,...pair.map(id=>SITES.find(s=>s.id===id).position));
+  // A physical spiral stair leading from the forest floor to the founding terrace.
+  for(let i=0;i<24;i++){const a=i/24*Math.PI*2,x=-9+Math.cos(a)*1.75,z=-3+Math.sin(a)*1.75;g.box(x,i/24*5,z,.75,.1,.6,P.wood);}
+  return g;
+}
+function makeDynamic(state,selected,preview){const g=new Geometry();
+  for(const w of state.workers){const p=workerPosition(w),x=p[0]+(w.id%2? .22:-.22),y=p[1]+.07,z=p[2]+(w.id>1?.32:0),walk=['outbound','returning'].includes(w.phase)?Math.sin(state.elapsed*8+w.id)*.12:0;
+    g.tube([x-.09,y+walk,z],[x-.09,y+.35,z],.055,.065,P.bark,5);g.tube([x+.09,y-walk,z],[x+.09,y+.35,z],.055,.065,P.bark,5);
+    g.tube([x,y+.28,z],[x,y+.82,z],.22,.12,w.id%2?'#a3af7c':'#517f6b',7);g.ellipsoid([x,y+1,z],[.15,.19,.14],'#e9c998',7,4);
+    g.ellipsoid([x,y+1.11,z-.02],[.16,.11,.14],'#d3b66e',7,3);g.face([[x-.13,y+1,z],[x-.3,y+1.1,z],[x-.14,y+.92,z]],'#e9c998');g.face([[x+.13,y+1,z],[x+.3,y+1.1,z],[x+.14,y+.92,z]],'#e9c998');
+    if(w.cargo)g.box(x,y+.4,z+.25,.32,.3,.28,w.cargo.resource==='food'?'#bfab68':P.wood);
+  }
+  if(preview&&selected&&!state.buildings[selected])building(g,SITES.find(s=>s.id===selected).position,preview,true);
+  return g;
+}
+
+
+// src/preview.js
+const PREVIEW_ID = 'First Grove 0.1.1-test.2';
+// Isolated smoke checks never read or mutate the player's active settlement.
+function runPreviewChecks() {
+  const results = [];
+  const check = (name, fn) => {
+    try { if (!fn()) throw new Error('Unexpected result'); results.push({ name, pass: true }); }
+    catch (error) { results.push({ name, pass: false, error: String(error.message) }); }
+  };
+  check('Six founding settlers', () => initialState().workers.length === 6);
+  check('Isolated building rejected', () => !build(initialState(), 'fern-low', 'garden').ok);
+  check('Bridge creates a real route', () => {
+    const s = initialState(); return connect(s, 'hearth', 'fern-low').ok && route(s, 'hearth', 'fern-low').length === 2;
+  });
+  check('Building charges wood once', () => {
+    const s = initialState(); connect(s, 'hearth', 'fern-low'); const before = s.resources.wood;
+    return build(s, 'fern-low', 'garden').ok && s.resources.wood === before - 24 && !build(s, 'fern-low', 'garden').ok;
+  });
+  check('Harvest arrives by carrying', () => {
+    const s = initialState(); connect(s, 'hearth', 'fern-low'); build(s, 'fern-low', 'garden'); assign(s, 'fern-low');
+    advance(s, 30); return s.stats.deliveredFood >= 6;
+  });
+  check('Save round-trip preserves progress', () => {
+    const s = initialState(); advance(s, 2.3); return serialize(deserialize(serialize(s))) === serialize(s);
+  });
+  check('Pause stops simulation', () => {
+    const s = initialState(); s.speed = 0; const before = serialize(s); advance(s, 30); return serialize(s) === before;
+  });
+  check('Invalid save rejected', () => { try { deserialize('{"version":99}'); return false; } catch { return true; } });
+  return results;
+}
+function previewReport(state, graphics, includeChecks = false) {
+  const intervals = graphics.frameIntervalsMs.filter(n => Number.isFinite(n) && n > 0 && n < 10000);
+  const average = intervals.length ? intervals.reduce((a, b) => a + b, 0) / intervals.length : null;
+  return {
+    build: PREVIEW_ID, generatedAt: new Date().toISOString(),
+    scope: 'Local diagnostics. Logic checks do not validate rendering, controls, accessibility or target-device performance.',
+    graphics: {
+      renderer: graphics.renderer, width: graphics.width, height: graphics.height,
+      pixelRatio: graphics.pixelRatio, staticFaces: graphics.staticFaces, contextLost: graphics.contextLost,
+      sampleCount: intervals.length, observedFps: average ? Math.round(10000 / average) / 10 : null
+    },
+    settlement: { elapsedSeconds: Math.round(state.elapsed), buildings: Object.keys(state.buildings).length,
+      workers: state.workers.length, bridges: state.links.length, resources: { ...state.resources } },
+    checks: includeChecks ? runPreviewChecks() : [],
+    privacy: 'No account identifier, user-agent string, complete save or URL included. No automatic upload.'
+  };
+}
+
+
+// src/app.js
+const $=id=>document.getElementById(id),SAVE_KEY='wood-elves.first-grove.v1';
+let state=initialState(),selected='fern-low',preview=null,foliage=true,dirty=true,uiDirty=true,saveAllowed=true,lastSave=0,lastUI=0,lastDraw=0,noticeUntil=0;
+let inspectorKey=null,lastDiagnostics=0;
+const frameSamples=[];let priorRenderTime=null;
+const notify=text=>{$('notice').textContent=text;$('notice').classList.add('visible');noticeUntil=performance.now()+5000;};
+try{const stored=localStorage.getItem(SAVE_KEY);if(stored){state=deserialize(stored);notify('Your saved grove has been restored.');}}catch(error){saveAllowed=false;notify('Saved grove could not be read. It has not been overwritten.');}
+let renderer;
+try{renderer=new GroveRenderer($('grove'),()=>{dirty=true;});}catch(error){$('fatal').hidden=false;$('fatal').textContent=`The grove renderer could not start. ${error.message}`;throw error;}
+$('render-mode').textContent=renderer.gl?'WebGL 2 · experimental preview':'Software 3D preview · GPU quality unverified';
+function rebuild(){renderer.setGeometry(makeScene(state,foliage));dirty=true;uiDirty=true;}
+function apply(action){const result=action();notify(result.ok?'The grove has changed.':result.reason);if(result.ok){rebuild();refresh();}return result;}
+function select(id){selected=id;preview=null;$('site-select').value=id;uiDirty=true;dirty=true;refresh();}
+const icon={home:'M4 20V10L15 2l11 8v10H4M11 20v-7h8v7',gatherer:'M15 22V4M15 11L7 6M15 16l9-9M6 22h19',garden:'M4 18h22v4H4zM9 18V9M9 13C0 12 3 5 9 9M9 10c7-8 11-1 0 3M21 18V8M21 12c-8-4-5-9 0-4',storehouse:'M4 9l11-7 11 7v13H4zM4 9h22M10 22V12h10v10',workshop:'M4 19h23M8 19v-6h16v6M8 13l12-9M16 3l8 4-3 4-8-4z'};
+for(const [kind,info] of Object.entries(KINDS)){const button=document.createElement('button');button.className='build-card';button.dataset.kind=kind;button.setAttribute('aria-pressed','false');button.innerHTML=`<svg viewBox="0 0 30 26" aria-hidden="true"><path d="${icon[kind]}"/></svg><span class="name">${info.name}</span><span class="cost">${info.cost} wood · ${info.load} load</span>`;button.addEventListener('click',()=>{preview=kind;uiDirty=true;dirty=true;refresh();});$('build-options').append(button);}
+for(const s of SITES){const option=document.createElement('option');option.value=s.id;option.textContent=s.name;$('site-select').append(option);const marker=document.createElement('button');marker.className='marker';marker.textContent=s.name;marker.dataset.site=s.id;marker.setAttribute('aria-label',`Inspect ${s.name}`);marker.addEventListener('click',()=>select(s.id));$('markers').append(marker);}
+$('site-select').value=selected;$('site-select').addEventListener('change',e=>select(e.target.value));
+function button(text,fn,disabled=false,className=''){const b=document.createElement('button');b.textContent=text;b.disabled=disabled;b.className=className;b.addEventListener('click',fn);return b;}
+function refresh(){
+  const s=SITES.find(s=>s.id===selected),t=TREES.find(t=>t.id===s.tree),b=state.buildings[selected],health=treeHealth(state,t.id);
+  $('wood').textContent=Math.floor(state.resources.wood);$('food').textContent=Math.floor(state.resources.food);$('tools').textContent=Math.floor(state.resources.tools);$('population').textContent=`${state.workers.length} / ${housing(state)}`;
+  const nextInspectorKey=JSON.stringify([selected,preview,state.buildings,state.links,Math.floor(state.resources.wood),state.workers.map(w=>[w.assignment,w.phase==='idle'])]);
+  if(nextInspectorKey!==inspectorKey){
+  inspectorKey=nextInspectorKey;
+  $('tree-name').textContent=t.name.toUpperCase();$('site-name').textContent=s.name;$('site-description').textContent=b?(b.kind==='hearth'?'The heart of the grove. Shared stores receive every delivered bundle.':KINDS[b.kind].description):'An open bough, ready for a connected tree dwelling or workplace.';
+  $('health-value').textContent=`${health}%`;$('health-meter').value=health;$('load-value').textContent=`${treeLoad(state,t.id)} / ${t.capacity} supported load · ${storage(state)} storage capacity`;
+  const connections=$('connection');connections.replaceChildren();
+  const line=document.createElement('p');line.textContent=connected(state,selected)?'Connected to the Hearth':'Isolated · no supply route';connections.append(line);
+  if(!connected(state,selected)){
+    for(const pair of LINKS.filter(pair=>pair.includes(selected))){const other=pair.find(id=>id!==selected);if(!connected(state,other))continue;const result=canConnect(state,...pair);connections.append(button(`Connect to ${SITES.find(s=>s.id===other).name} · 12 wood`,()=>apply(()=>connect(state,...pair)),!result.ok));}
+  }
+  const construction=$('construction');construction.replaceChildren();
+  if(preview){const title=document.createElement('strong');title.textContent=`Preview: ${KINDS[preview].name}`;construction.append(title);const result=canBuild(state,selected,preview);const text=document.createElement('p');text.textContent=result.ok?`${KINDS[preview].cost} wood · ${KINDS[preview].load} tree load. No resources spent until confirmed.`:result.reason;construction.append(text);construction.append(button('Confirm construction',()=>{const kind=preview;const result=apply(()=>build(state,selected,kind));if(result.ok){preview=null;refresh();}},!result.ok,'primary'));construction.append(button('Cancel preview',()=>{preview=null;dirty=true;refresh();},false,'cancel'));}
+  const workers=$('workers');workers.replaceChildren();
+  if(KINDS[b?.kind]?.output){const assigned=state.workers.filter(w=>w.assignment===selected).length,idle=state.workers.filter(w=>!w.assignment&&w.phase==='idle').length;const text=document.createElement('p');text.textContent=`${assigned} / 2 elves assigned · ${idle} idle`;workers.append(text);const pair=document.createElement('div');pair.className='pair';pair.append(button('+ Assign elf',()=>apply(()=>assign(state,selected)),!idle||assigned>=2),button('− Recall',()=>apply(()=>unassign(state,selected)),!assigned));workers.append(pair);}
+  for(const b of document.querySelectorAll('.build-card'))b.setAttribute('aria-pressed',String(b.dataset.kind===preview));
+  for(const m of document.querySelectorAll('.marker')){m.classList.toggle('selected',m.dataset.site===selected);m.setAttribute('aria-pressed',String(m.dataset.site===selected));}
+  } // Keep focused controls intact when only time/food counters change.
+  const goals=[['goal-bridge',state.stats.bridges>0,'Connect a new bough'],['goal-garden',Object.values(state.buildings).some(b=>b.kind==='garden'),'Build a canopy garden'],['goal-food',state.stats.deliveredFood>0,'Bring the first harvest home']];for(const [id,done,text] of goals){$(id).textContent=text;$(id).classList.toggle('done',done);}
+  $('goal').textContent=state.stats.deliveredFood>0?'The first harvest is home. Add a dwelling and a branchwright.':'Connect Fernwatch to the Hearth, then grow a garden.';
+  $('day').textContent=`Grove day ${1+Math.floor(state.elapsed/180)}`;
+  for(const b of document.querySelectorAll('[data-speed]'))b.setAttribute('aria-pressed',String(Number(b.dataset.speed)===state.speed));
+  uiDirty=false;
+}
+function save(manual=false){try{if(manual&&!saveAllowed&&!confirm('A stored save could not be read. Overwrite it with the current grove?'))return;if(!manual&&!saveAllowed)return;localStorage.setItem(SAVE_KEY,serialize(state));saveAllowed=true;if(manual)notify('Grove saved in this browser. Export a file for a separate copy.');}catch(error){saveAllowed=false;if(manual)notify(`Save failed: ${error.message}`);}}
+$('save').addEventListener('click',()=>save(true));$('menu-save').addEventListener('click',()=>save(true));$('menu-load').addEventListener('click',()=>$('load').click());$('load').addEventListener('click',()=>{try{const text=localStorage.getItem(SAVE_KEY);if(!text){notify('No saved grove exists in this browser yet.');return;}const candidate=deserialize(text);state=candidate;preview=null;rebuild();refresh();notify('Saved grove restored.');}catch(error){notify(`Load failed: ${error.message}`);}});
+$('foliage').addEventListener('click',()=>{foliage=!foliage;$('foliage').setAttribute('aria-pressed',String(foliage));$('foliage').textContent=foliage?'Canopy on':'Canopy cutaway';rebuild();});
+$('zoom-in').addEventListener('click',()=>{renderer.zoom=Math.min(1.8,renderer.zoom*1.15);dirty=true;});$('zoom-out').addEventListener('click',()=>{renderer.zoom=Math.max(.55,renderer.zoom/1.15);dirty=true;});$('camera-home').addEventListener('click',()=>renderer.resetCamera());
+for(const b of document.querySelectorAll('[data-speed]'))b.addEventListener('click',()=>{state.speed=Number(b.dataset.speed);refresh();});
+function help(open){$('help-panel').hidden=!open;$('help').setAttribute('aria-expanded',String(open));if(open)$('close-help').focus();else $('help').focus();}
+$('help').addEventListener('click',()=>help($('help-panel').hidden));$('close-help').addEventListener('click',()=>help(false));
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!$('help-panel').hidden)help(false);preview=null;dirty=true;refresh();}});
+function download(name,text){const url=URL.createObjectURL(new Blob([text],{type:'application/json'})),a=document.createElement('a');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+$('export').addEventListener('click',()=>{try{download('wood-elves-grove-save.json',serialize(state));notify('Save file exported.');}catch(error){notify(error.message);}});
+$('import').addEventListener('click',()=>$('import-file').click());$('import-file').addEventListener('change',async e=>{const f=e.target.files[0];if(!f)return;try{if(f.size>50000)throw new Error('Save exceeds the 50 KB limit.');const candidate=deserialize(await f.text());state=candidate;preview=null;rebuild();refresh();notify('Save imported. Autosave will store it when available; keep exported copies for recovery.');}catch(error){notify(`Import rejected: ${error.message}`);}e.target.value='';});
+$('preview-identity').textContent=PREVIEW_ID;
+function report(includeChecks=false){return previewReport(state,{renderer:renderer.mode,width:Math.round(renderer.width||0),height:Math.round(renderer.height||0),pixelRatio:renderer.dpr||1,frameIntervalsMs:frameSamples,staticFaces:renderer.staticGeometry.faces.length,contextLost:!!renderer.lost},includeChecks);}
+$('logic-checks').addEventListener('click',()=>{const checks=runPreviewChecks();$('check-results').textContent=`${checks.filter(c=>c.pass).length} / ${checks.length} logic checks passed. `+checks.filter(c=>!c.pass).map(c=>`${c.name}: ${c.error}`).join(' ');});
+$('export-diagnostics').addEventListener('click',()=>download('first-grove-diagnostics-0.1.1.json',JSON.stringify(report(true),null,2)));
+$('new-grove').addEventListener('click',()=>{if(!confirm('Start a new grove? Unsaved progress will be replaced. Export a save first to keep it.'))return;state=initialState();preview=null;inspectorKey=null;lastSave=performance.now();rebuild();refresh();notify('New grove started. Autosave will store it; exported saves are unchanged.');});
+// No test-only mutation API is exposed in the playable build.
+let last=performance.now();
+function frame(now){try{const dt=Math.min(.2,Math.max(0,(now-last)/1000));last=now;
+  if(!document.hidden&&!renderer.lost)advance(state,dt);
+  if(now-lastUI>500||uiDirty){refresh();lastUI=now;}
+  if(!document.hidden&&!renderer.lost&&(dirty||now-lastDraw>(renderer.gl?16:66))){
+    if(priorRenderTime!==null){frameSamples.push(now-priorRenderTime);if(frameSamples.length>120)frameSamples.shift();}priorRenderTime=now;
+    renderer.draw(makeDynamic(state,selected,preview));for(const s of SITES){const [x,y]=renderer.project(s.position.map((v,i)=>v+(i===1?.2:0))),m=document.querySelector(`[data-site="${s.id}"]`);m.style.left=`${x}px`;m.style.top=`${y+27}px`;m.hidden=x<0||x>renderer.width||y<0||y>renderer.height;}lastDraw=now;dirty=false;
+  }
+  if(now-lastSave>20000){save();lastSave=now;}
+  if(now>noticeUntil)$('notice').classList.remove('visible');
+  $('render-mode').textContent=renderer.lost?'Graphics context lost · simulation paused':`${PREVIEW_ID} · ${renderer.mode}`;
+  if(!$('help-panel').hidden&&now-lastDiagnostics>500){lastDiagnostics=now;const r=report();$('preview-metrics').textContent=`${r.graphics.renderer} · ${r.graphics.width} × ${r.graphics.height} · ${r.graphics.observedFps===null?'collecting frames':r.graphics.observedFps+' observed FPS'}. This is a rolling display rate, not a device benchmark.`;}
+}catch(error){$('fatal').hidden=false;$('fatal').textContent=`The prototype stopped safely. Reload to restore the last saved grove. ${error.message}`;return;}requestAnimationFrame(frame);}
+window.addEventListener('resize',()=>{dirty=true;});document.addEventListener('visibilitychange',()=>{last=performance.now();priorRenderTime=null;frameSamples.length=0;if(document.hidden)save();});
+rebuild();refresh();requestAnimationFrame(frame);
+
+
+})();</script>
+</body></html>
