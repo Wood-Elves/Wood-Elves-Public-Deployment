@@ -1,0 +1,24 @@
+name: Prepare reviewed test.3 release branch
+on:
+  push:
+    branches: [ops/prepare-first-grove-test3]
+permissions:
+  contents: write
+jobs:
+  prepare:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262
+        with:
+          fetch-depth: 0
+      - name: Build exactly the reviewed three-file update on an isolated release branch
+        run: |
+          cp .github/scripts/prepare-test3.mjs "$RUNNER_TEMP/prepare-test3.mjs"
+          git checkout --detach 69435b284197aa1444978b4db10d81b44af66d8a
+          node "$RUNNER_TEMP/prepare-test3.mjs"
+          node verify-release.mjs
+          git add index.html release.json DEPLOYMENT.md
+          test "$(git write-tree)" = caf31c02bd43ee94e50effb45d24875bd28eaff6
+          git -c user.name='github-actions[bot]' -c user.email='41898282+github-actions[bot]@users.noreply.github.com' commit -m 'fix: keep landscape construction controls clear of the catalogue'
+          git push origin HEAD:refs/heads/release/first-grove-test3

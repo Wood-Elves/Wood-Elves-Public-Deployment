@@ -1,0 +1,24 @@
+// Bounded public-release transformation. Abort unless both input and output match review.
+import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import assert from 'node:assert/strict';
+const hash = b => createHash('sha256').update(b).digest('hex');
+const OLD='efc771bddea971abf0240b466db3b8079475ea4ef64305c0cd84d1b43b819506';
+const NEW='9c202cdf18041e4014735a318ae127c0108127b084f4e4c348a4dfcd5c4cd5ca';
+const css = "\n/* Short landscape viewports: keep the inspector above, not behind, the catalogue. */\n@media (max-height:600px) and (min-width:761px){\n #game{height:100dvh;min-height:360px}\n .brand{left:16px;top:10px}.brand h1{font-size:25px}.brand p{display:none}.brand .eyebrow{font-size:7px;letter-spacing:1.3px;margin-bottom:4px}\n .resources{top:10px;right:16px;left:auto;transform:none;padding:6px 3px}.resources>div{padding:0 13px}.resources strong{font-size:20px}.resource-label{font-size:7px;letter-spacing:1px}\n .top-actions{left:16px;right:auto;top:65px}.top-actions button{min-height:34px;padding:6px 9px}\n .inspector{top:86px;bottom:140px;right:16px;left:auto;width:250px;max-height:none;padding:12px;overflow-y:auto;overscroll-behavior:contain}\n .inspector h2{font-size:20px}.inspector .health{margin:10px 0}.inspector .site-label{margin-top:10px}\n .goals{display:none}\n .camera{top:110px;bottom:auto;right:278px}.camera button{width:34px;min-height:34px;font-size:17px;padding:4px}\n .build-tray{left:16px;right:16px;bottom:42px;width:auto;transform:none;padding:7px}.tray-title{margin-bottom:5px}.tray-title small{display:none}\n .build-card{min-height:63px;padding:5px}.build-card svg{height:18px}.build-card .name{font-size:12px}.build-card .cost{font-size:8px}\n .bottom-bar{height:34px;padding:0 16px}.time-controls span{display:none}\n #notice{bottom:145px;max-width:330px;font-size:10px;padding:7px 11px}\n}\n";
+let html=await readFile('index.html','utf8');assert.equal(hash(Buffer.from(html)),OLD);
+const marker='.bottom-bar #render-mode{max-width:48%;letter-spacing:0}\n</style>';
+assert.equal(html.split(marker).length,2);
+html=html.replace(marker,marker.replace('</style>',css+'</style>')).replaceAll('0.1.1-test.2','0.1.1-test.3');
+const scripts=[...html.matchAll(/<script>([\s\S]*?)<\/script>/g)];assert.equal(scripts.length,1);
+const digest=createHash('sha256').update(scripts[0][1]).digest('base64');
+html=html.replace(/script-src 'sha256-[A-Za-z0-9+/=]+'/,`script-src 'sha256-${digest}'`);
+assert.equal(Buffer.byteLength(html),61007);assert.equal(hash(Buffer.from(html)),NEW);
+const manifest=JSON.parse(await readFile('release.json','utf8'));assert.equal(manifest.assets['index.html'].sha256,OLD);
+manifest.build='First Grove 0.1.1-test.3';manifest.acceptance='Experimental preview; headless smoke evidence recorded separately. Physical-device and final graphics acceptance pending.';
+manifest.assets['index.html']={bytes:61007,sha256:NEW};
+let guide=await readFile('DEPLOYMENT.md','utf8');
+guide=guide.replaceAll('0.1.1-test.2','0.1.1-test.3').replace('Actual browser behavior, WebGL, mobile controls, accessibility and target-device performance remain unverified.','Headless browser smoke checks now cover the live runtime separately. Physical devices, Safari/iOS, complete accessibility and target-device performance remain unverified.');
+guide+='\n## Test.3 layout correction\n\nThe preceding preview exposed a short-landscape overlap between the inspector and building catalogue. Test.3 adds a bounded scrolling inspector and a viewport-fitting landscape layout. The simulation and save format are unchanged. Keep the original failed test evidence when evaluating the corrected release.\n';
+await writeFile('index.html',html);await writeFile('release.json',JSON.stringify(manifest,null,2)+'\n');await writeFile('DEPLOYMENT.md',guide);
+console.log(JSON.stringify({reviewedRuntime:NEW,bytes:61007,scope:'Three approved public files only; no deployment or private source transfer.'}));
