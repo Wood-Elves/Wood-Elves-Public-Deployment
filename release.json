@@ -1,13 +1,13 @@
 {
-  "build": "First Grove 0.1.1-test.2",
+  "build": "First Grove 0.1.1-test.3",
   "channel": "experimental-public-test",
-  "acceptance": "Logic checks only; browser, GPU, accessibility and target-device acceptance pending.",
+  "acceptance": "Experimental preview; headless smoke evidence recorded separately. Physical-device and final graphics acceptance pending.",
   "privacy": "No automatic telemetry. Saves and diagnostic exports stay local until shared by the player.",
   "publishing_root": "/",
   "assets": {
     "index.html": {
-      "bytes": 59598,
-      "sha256": "efc771bddea971abf0240b466db3b8079475ea4ef64305c0cd84d1b43b819506"
+      "bytes": 61007,
+      "sha256": "9c202cdf18041e4014735a318ae127c0108127b084f4e4c348a4dfcd5c4cd5ca"
     },
     ".nojekyll": {
       "bytes": 0,
